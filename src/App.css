@@ -192,3 +192,18 @@ img, video { max-width: 100%; }
   .next-room__subheadline { max-width: 300px; line-height: 1.45 !important; }
   .next-room__image { height: min(68vw, 320px); margin-top: 34px; }
 }
+
+/* Letters are read like a real page: the modal itself scrolls, so no paragraph is trapped behind a cropped panel. */
+.letter-modal { display: block; overflow-y: auto; overscroll-behavior: contain; padding: 7vh 7vw; }
+.letter-modal__close { position: fixed; z-index: 2; }
+.letter-paper { max-height: none; min-height: 0; margin: 0 auto; overflow: visible; }
+.letter-body { max-height: none; overflow: visible; padding-right: 0; }
+.letter-body p { white-space: pre-line; }
+
+@media (max-width: 900px) {
+  .letter-modal { padding: 58px 14px 28px; }
+  .letter-modal__close { top: 14px; right: 14px; }
+  .letter-paper { width: 100%; max-height: none; margin: 0 auto; overflow: visible; }
+  .letter-body { max-height: none; overflow: visible; }
+  .letter-body p { font-size: 16px; line-height: 1.65; }
+}

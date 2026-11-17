@@ -135,32 +135,41 @@ function Countdown() {
 
 function Museum({ autoStart }: { autoStart: boolean }) {
   const [activeRoom, setActiveRoom] = useState('beginning')
-  const [lightbox, setLightbox] = useState<string | null>(null)
   const [letter, setLetter] = useState<typeof content.letters[number] | null>(null)
+  const [isVisible, setIsVisible] = useState(false)
+  const museumSectionRef = useRef<HTMLElement | null>(null)
   const room = content.rooms.find((item) => item.id === activeRoom) ?? content.rooms[0]
   useEffect(() => {
-    if (!autoStart || lightbox || letter) return
+    const node = museumSectionRef.current
+    if (!node) return
+    const observer = new IntersectionObserver(([entry]) => setIsVisible(entry.isIntersecting), { threshold: 0.15 })
+    observer.observe(node)
+    return () => observer.disconnect()
+  }, [])
+  useEffect(() => {
+    if (!autoStart || !isVisible || letter) return
     const timer = window.setInterval(() => setActiveRoom((current) => {
       const index = content.rooms.findIndex((item) => item.id === current)
       return content.rooms[(index + 1) % content.rooms.length].id
-    }), 7500)
+    }), 8500)
     return () => window.clearInterval(timer)
-  }, [autoStart, lightbox, letter])
-  return <section className="museum" id="museum">
+  }, [activeRoom, autoStart, isVisible, letter])
+  useEffect(() => {
+    document.body.style.overflow = letter ? 'hidden' : ''
+    return () => { document.body.style.overflow = '' }
+  }, [letter])
+  return <section ref={museumSectionRef} className="museum" id="museum">
     <div className="museum-header"><div className="museum-header__brand"><span className="museum-mark">M<span>O</span>U</span><span>private exhibition<br />no. 001</span></div><div className="museum-header__title"><span>the archive of</span><h2>Our Love</h2></div><Countdown /><button className="museum-menu" aria-label="Open museum menu"><span /><span /></button></div>
     <div className="museum-intro"><video className="museum-intro__video" autoPlay muted loop playsInline preload="metadata" src={content.media.ambientVideo} aria-hidden="true" /><div className="museum-intro__copy"><span className="section-marker">a private exhibition / 2024—∞</span><h1>The Museum<br /><em>of Us</em></h1></div><p>Some moments are too beautiful to leave in the past.</p></div>
     <nav className="room-nav" aria-label="Museum rooms">{content.rooms.map((item, index) => <button className={activeRoom === item.id ? 'is-active' : ''} onClick={() => setActiveRoom(item.id)} key={item.id}><span>0{index + 1}</span>{item.title}</button>)}</nav>
     <div className="room-content" key={room.id}><div className="room-content__heading"><span className="section-marker">room 0{content.rooms.findIndex((item) => item.id === room.id) + 1} / {room.kicker}</span><h2>{room.title}</h2><p>{room.description}</p></div>
       {room.id === 'beginning' && <div className="beginning-room"><ImagePlaceholder src={content.beginning.image} alt="The beginning" className="beginning-room__image" /><div className="beginning-room__note"><span>the first page</span><p>{content.beginning.story}</p><div className="note-line" /><small>{content.beginning.date}</small></div></div>}
       {room.id === 'firsts' && <div className="firsts-grid">{content.firsts.map((item, index) => <article key={item.title} className={`first-card first-card--${index + 1}`}><span>0{index + 1}</span><h3>{item.title}</h3><p>{item.description}</p><small>{item.date}</small></article>)}</div>}
-      {room.id === 'moments' && <div className="moments-grid">{content.moments.map((item) => <button key={item.title} onClick={() => setLightbox(item.image)}><ImagePlaceholder src={item.image} alt={item.title} /><span><b>{item.title}</b><small>{item.caption}</small></span></button>)}</div>}
       {room.id === 'her' && <div className="her-room"><div className="her-room__manifesto"><span>an incomplete list</span><h3>Things I notice<br /><em>about you.</em></h3><p>{content.her.intro}</p></div><div className="her-room__list">{content.her.items.map((item, index) => <div key={item}><span>0{index + 1}</span><p>{item}</p></div>)}</div></div>}
-      {room.id === 'adventures' && <div className="adventures-grid">{content.adventures.map((item) => <article key={item.title}><ImagePlaceholder src={item.image} alt={item.title} /><div><span>{item.date} · {item.location}</span><h3>{item.title}</h3><p>{item.description}</p></div></article>)}</div>}
       {room.id === 'letters' && <div className="letters-room"><div className="letters-room__intro"><span className="section-marker">a letter library</span><h3>Words I Want<br /><em>You to Keep</em></h3><p>Because sometimes, even a thousand kisses cannot say everything my heart wants you to know.</p></div><div className="letters-grid">{content.letters.map((item, index) => <button className={`letter-card letter-card--${index + 1}`} key={item.title} onClick={() => setLetter(item)}><span className="envelope__number">0{index + 1}</span><span className="envelope__eyebrow">private correspondence</span><Icon name="heart" size={19} /><h3>{item.title}</h3><p>{item.description}</p><small>{item.openWhen}</small></button>)}</div></div>}
       {room.id === 'next' && <div className="next-room"><div className="next-room__star"><Icon name="spark" size={30} /></div><p className="next-room__story">{content.nextChapter.message}</p><h3>{content.nextChapter.headline}</h3><p className="next-room__subheadline">{content.nextChapter.subheadline}</p><ImagePlaceholder src={content.nextChapter.image} alt="A favourite memory from our first year" className="next-room__image" /><div className="final-signature">{content.yourName}<span>with all my love</span></div><div className="capsule"><Icon name="lock" size={21} /><span>sealed time capsule</span><small>open on your second anniversary</small></div><Countdown /></div>}
     </div>
     <footer className="museum-footer"><span>made with intention</span><span>for {content.herName} · from {content.yourName}</span><span>∞</span></footer>
-    {lightbox && <div className="lightbox" role="dialog" aria-modal="true" onClick={() => setLightbox(null)}><button className="lightbox__close" onClick={() => setLightbox(null)} aria-label="Close image"><Icon name="close" /></button><ImagePlaceholder src={lightbox} alt="Selected memory" className="lightbox__image" /></div>}
     {letter && <div className="letter-modal" role="dialog" aria-modal="true"><button className="letter-modal__close" onClick={() => setLetter(null)} aria-label="Close letter"><Icon name="close" /></button><div className="letter-paper"><div className="letter-paper__topline"><span className="section-marker">a letter for you</span><span>no. {String(content.letters.indexOf(letter) + 1).padStart(2, '0')}</span></div><h2>{letter.title}</h2><div className="letter-body">{letter.body.split('\n\n').map((paragraph, index) => <p key={`${letter.title}-${index}`}>{paragraph}</p>)}</div><span className="signature">{content.yourName}<small>always</small></span></div></div>}
   </section>
 }
