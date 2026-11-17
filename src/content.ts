@@ -5,6 +5,7 @@ export const content = {
   media: {
     introVideo: 'https://res.cloudinary.com/dimunxv7d/video/upload/v1794948854/WhatsApp_Video_2026-11-17_at_9.48.11_PM_xcqeuq.mp4',
     ambientVideo: 'https://res.cloudinary.com/dimunxv7d/video/upload/v1794948854/WhatsApp_Video_2026-11-17_at_9.48.10_PM_nvq92o.mp4',
+    finalImage: 'https://res.cloudinary.com/dimunxv7d/image/upload/v1794948857/WhatsApp_Image_2026-11-17_at_9.47.13_PM_3_xs4mkh.jpg',
   },
   soundtrack: {
     title: 'Bad Dancer',
@@ -22,7 +23,7 @@ export const content = {
   ],
   favorite: {
     headline: 'Out of everyone in this world, you’re my favourite plot twist.',
-    message: 'Replace this with the message you want her to keep. The best words are usually the ones only you would say.',
+    message: 'my mamahhhhhhhhhhhhhhhh , yes you!!!!!!!!',
     image: 'https://res.cloudinary.com/dimunxv7d/image/upload/v1794948854/WhatsApp_Image_2026-11-17_at_9.47.15_PM_1_hkggmq.jpg',
   },
   highlights: [
@@ -41,21 +42,6 @@ export const content = {
     { title: 'A song for the in-between', artist: 'Ed sheeran', why: 'Because i wanna grow old with you', link: 'https://music.youtube.com/search?q=perfect+ed+sheeran', image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSi4IYYHOEMIXAKoNcohHZg4zycZsZxFAXFfqbVo3y23Q&s=10' },
     { title: 'Our next favourite', artist:'Hillsong united', why: 'Because these songs will be our family natinoal anthem', link: 'https://music.youtube.com/search?q=stay+and+wait+hillsong+united', image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRMLBNQDqtPjyedWkTXwuyjvo7Iee-LyvwgGk0KvGTHFw&s=10' },
   ],
-  rooms: [
-    { id: 'beginning', kicker: 'where it began', title: 'The Beginning', description: 'Every story has a first page. This one is ours.' },
-    { id: 'firsts', kicker: 'milestones', title: 'The Firsts', description: 'Everything has a first. These are the ones worth keeping.' },
-    { id: 'her', kicker: 'a portrait in details', title: 'Her', description: 'An exhibition dedicated to the person who makes this all brighter.' },
-    { id: 'letters', kicker: 'words to keep', title: 'Words I Want You to Keep', description: 'Because sometimes, even a thousand kisses cannot say everything my heart wants you to know.' },
-    { id: 'next', kicker: 'the future', title: 'The Next Chapter', description: 'This is only the beginning.' },
-  ],
-  beginning: { date: '24th october 2025', story: 'The start of a beautiful beginning, we had our first whatsApp call this day', image: 'https://res.cloudinary.com/dimunxv7d/image/upload/v1794948854/WhatsApp_Image_2026-11-17_at_9.47.15_PM_1_hkggmq.jpg' },
-  firsts: [
-    { title: 'First conversation', date: '25th october,2025', description: 'This was the day i first heard your voice over the phone. it was  heavenly?. I Knew i had to stay' },
-    { title: 'First date', date: '16th November 2026', description: 'We had our first date at tincity cafe and you were the most beautiful piece of art i had ever set eyes on.' },
-    { title: 'First photograph', date: 'November 18th', description: 'The first proof that this was becoming something.' },
-    { title: 'First adventure', date: 'October 2026', description: 'We went round kaduna looking for a hotel lol' },
-  ],
-  her: { intro: 'The things that make you beautiful have very little to do with being looked at. They have everything to do with the way you move through the world.', items: ['the way you make room for people to be themselves', 'your curiosity, even about the smallest things', 'how your kindness keeps showing up', 'the quiet strength you carry so naturally', 'the person I get to become beside you'] },
   letters: [
     {
       title: 'One year, and still my favourite hello',

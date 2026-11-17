@@ -193,6 +193,61 @@ img, video { max-width: 100%; }
   .next-room__image { height: min(68vw, 320px); margin-top: 34px; }
 }
 
+/* Wrapped-only chapters */
+.slide--8 { background: var(--burgundy); color: var(--cream); }
+.letters-slide h2 { margin: 50px 0 22px; font: 500 clamp(43px, 6vw, 78px)/.97 var(--serif); letter-spacing: -.05em; }
+.letters-slide h2 em { color: var(--rose); }
+.letters-slide__intro { max-width: 420px; color: rgba(255,248,240,.65); font: italic 16px/1.5 var(--serif); }
+.letter-strip { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; max-width: 900px; margin-top: 42px; }
+.letter-pill { position: relative; min-height: 112px; display: grid; grid-template-columns: 30px minmax(0, 1fr) 20px; grid-template-rows: 1fr auto; gap: 6px 12px; align-items: end; padding: 18px 18px 16px; color: var(--burgundy); background: var(--blush); text-align: left; transition: transform .25s, background .25s; }
+.letter-pill:hover { transform: translateY(-4px); background: var(--cream); }
+.letter-pill > span { grid-row: 1 / span 2; align-self: start; color: var(--rose); font: 10px var(--mono); }
+.letter-pill strong { overflow: hidden; font: 500 19px/1.05 var(--serif); text-overflow: ellipsis; white-space: nowrap; }
+.letter-pill small { overflow: hidden; color: rgba(100,30,54,.6); font: 9px var(--mono); text-overflow: ellipsis; text-transform: uppercase; white-space: nowrap; }
+.letter-pill svg { grid-column: 3; grid-row: 1 / span 2; align-self: center; }
+.letter-pill--2 { background: #e8c4c6; }.letter-pill--3 { background: #e4d4c1; }.letter-pill--4 { background: #d9d2c0; }.letter-pill--5 { background: #ead6c3; }.letter-pill--6 { background: #e3c5c6; }.letter-pill--7 { background: #ded1bd; }
+.final-slide { display: grid; place-items: center; text-align: center; overflow: hidden; }
+.final-slide__content { position: relative; z-index: 2; display: flex; align-items: center; flex-direction: column; width: min(650px, 100%); }
+.final-slide h2 { margin: 24px 0 20px; font: 500 clamp(43px, 6vw, 78px)/.98 var(--serif); letter-spacing: -.05em; }
+.final-slide h2 em { color: var(--rose); }
+.final-slide__content > p { max-width: 480px; color: rgba(255,248,240,.7); font: italic 17px/1.5 var(--serif); }
+.final-visual { position: relative; width: min(520px, 82vw); height: min(43svh, 420px); margin: 26px 0 18px; }
+.final-photo { width: 100%; height: 100%; margin: 0; border: 0; transform: rotate(-3deg); }
+.final-video { display: block; object-fit: contain; background: transparent; }
+.final-image { background-size: contain; background-repeat: no-repeat; background-color: transparent; animation: final-image-in .9s both cubic-bezier(.2,.8,.2,1); }
+.love-bubbles { position: absolute; z-index: 3; inset: 0; overflow: hidden; pointer-events: none; }
+.love-bubbles span { position: absolute; bottom: -30px; color: var(--rose); font: italic clamp(14px, 2vw, 25px) var(--serif); text-shadow: 0 2px 16px rgba(244,221,225,.42); opacity: 0; animation: bubble-rise 6s ease-in infinite; }
+@keyframes bubble-rise { 0% { transform: translate3d(0, 20px, 0) rotate(-8deg) scale(.8); opacity: 0; } 14% { opacity: .84; } 75% { opacity: .4; } 100% { transform: translate3d(18px, -76vh, 0) rotate(13deg) scale(1.2); opacity: 0; } }
+@keyframes final-image-in { from { opacity: 0; transform: scale(.94) rotate(2deg); } to { opacity: 1; transform: scale(1) rotate(-3deg); } }
+.final-slide__signature { display: flex; flex-direction: column; font: italic 24px var(--serif); }
+.final-slide__signature span { margin-top: 5px; color: var(--champagne); font: 9px var(--mono); letter-spacing: .12em; text-transform: uppercase; }
+.final-replay { display: inline-flex; gap: 9px; align-items: center; margin-top: 29px; padding: 10px 0; color: var(--champagne); background: transparent; font: 9px var(--mono); letter-spacing: .12em; text-transform: uppercase; }
+.confetti { position: absolute; z-index: 1; inset: -10% 0 0; overflow: hidden; pointer-events: none; }
+.confetti i { position: absolute; top: -30px; display: block; border-radius: 1px; opacity: .9; animation: confetti-fall 5.5s linear infinite; }
+@keyframes confetti-fall { 0% { transform: translate3d(0, -10vh, 0) rotate(0); opacity: 0; } 10% { opacity: .9; } 100% { transform: translate3d(30px, 115vh, 0) rotate(620deg); opacity: 0; } }
+
+@media (max-width: 900px) {
+  .letters-slide h2 { margin: 40px 0 20px; font-size: clamp(42px, 10.5vw, 59px); }
+  .letters-slide__intro { max-width: 310px; font-size: 14px; }
+  .letter-strip { grid-template-columns: 1fr; gap: 8px; margin-top: 32px; }
+  .letter-pill { min-height: 83px; grid-template-columns: 27px minmax(0, 1fr) 18px; padding: 14px; }
+  .letter-pill strong { font-size: 17px; }
+  .letter-pill small { font-size: 8px; }
+  .final-slide h2 { font-size: clamp(42px, 10.5vw, 59px); }
+  .final-slide__content > p { max-width: 310px; font-size: 15px; }
+  .final-visual { width: min(100%, 520px); height: min(50dvh, 430px); margin-top: 30px; }
+  .final-photo { width: 100%; height: 100%; }
+}
+
+/* The intro video should feel visible and inviting, not hidden behind a heavy wash. */
+.intro-video { opacity: .55; }
+.slide--1::after { background: linear-gradient(180deg, rgba(100,30,54,.22), rgba(100,30,54,.52)); }
+.gesture-guide { display: flex; flex-direction: column; align-items: center; gap: 5px; margin-top: 25px; color: var(--champagne); text-transform: uppercase; }
+.gesture-guide span { display: block; animation: gesture-bounce 1.5s ease-in-out infinite; font: 22px/1 var(--sans); }
+.gesture-guide strong { font: 10px var(--mono); letter-spacing: .15em; }
+.gesture-guide small { color: rgba(255,248,240,.55); font: 9px var(--mono); letter-spacing: .08em; }
+@keyframes gesture-bounce { 0%, 100% { transform: translateY(4px); opacity: .55; } 50% { transform: translateY(-4px); opacity: 1; } }
+
 /* Letters are read like a real page: the modal itself scrolls, so no paragraph is trapped behind a cropped panel. */
 .letter-modal { display: block; overflow-y: auto; overscroll-behavior: contain; padding: 7vh 7vw; }
 .letter-modal__close { position: fixed; z-index: 2; }
